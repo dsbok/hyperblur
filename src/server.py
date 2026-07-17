@@ -15,7 +15,6 @@ from . import routes, priviblur_extractor, preferences, i18n
 from .exceptions import error_handlers
 from .config import load_config
 from .helpers import setup_logging, helpers, render, ext_npf_renderer
-from .version import VERSION, CURRENT_COMMIT
 
 
 # Load configuration file
@@ -41,9 +40,7 @@ app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 
 app.ctx.LOGGER = logging.getLogger("priviblur")
 
-app.ctx.CURRENT_COMMIT = CURRENT_COMMIT  # Used for cache busting
 app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
-app.ctx.VERSION = VERSION
 
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
@@ -73,32 +70,10 @@ async def initialize(app):
         "referer": "https://www.tumblr.com/",
     }
 
-    # TODO set pool size for image requests
-
-    def create_image_client(url, timeout=priviblur_backend.image_response_timeout):
-        timeout = aiohttp.ClientTimeout(timeout)
-        return aiohttp.ClientSession(url, headers=media_request_headers, timeout=timeout)
-
-    app.ctx.Media64Client = create_image_client("https://64.media.tumblr.com")
-
-    app.ctx.Media49Client = create_image_client("https://49.media.tumblr.com")
-
-    app.ctx.Media44Client = create_image_client("https://44.media.tumblr.com")
-
-    app.ctx.MediaVeClient = create_image_client("https://ve.media.tumblr.com")
-
-    app.ctx.MediaVaClient = create_image_client("https://va.media.tumblr.com")
-
-    app.ctx.MediaGenericClient = aiohttp.ClientSession(
+    app.ctx.MediaClient = aiohttp.ClientSession(
         headers=media_request_headers,
         timeout=aiohttp.ClientTimeout(priviblur_backend.image_response_timeout),
     )
-
-    app.ctx.AudioClient = create_image_client("https://a.tumblr.com")
-
-    app.ctx.TumblrAssetClient = create_image_client("https://assets.tumblr.com")
-
-    app.ctx.TumblrStaticClient = create_image_client("https://static.tumblr.com")
 
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
         "https://at.tumblr.com",
@@ -148,7 +123,15 @@ async def initialize(app):
 @app.listener("main_process_start")
 async def main_startup_listener(app):
     """Startup listener to notify of priviblur startup"""
-    print(f"Starting up Priviblur version {VERSION}")
+    print("Starting up Priviblur")
+
+
+@app.listener("after_server_stop")
+async def cleanup(app, loop):
+    """Cleanup listener to close all ClientSessions"""
+    await app.ctx.MediaClient.close()
+    await app.ctx.TumblrAtClient.close()
+    await app.ctx.TumblrAPI.client.close()
 
 
 @app.get("/")
