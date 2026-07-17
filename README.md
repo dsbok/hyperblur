@@ -1,44 +1,35 @@
 # Priviblur
 
-Priviblur is an alternative, lightweight, privacy-focused frontend to Tumblr. It proxies requests to Tumblr so you can browse without tracking, has no account requirements, and works without Javascript.
+Priviblur is a lightweight, privacy-focused alternative frontend to Tumblr. It allows browsing Tumblr without tracking, without an account, and works without JavaScript.
 
-## Features
+## Getting Started (Docker Only)
 
-- Image and video proxying
-- Video download button
-- Anonymous browsing
+Priviblur runs exclusively via Docker.
 
-## Installation
+### 1. Start the Application
 
-### Docker
-
-Use the provided `docker-compose.yml` to run the application:
+Run the following command in the directory containing `docker-compose.yml`:
 
 ```bash
 docker compose up -d
 ```
 
-### Manual
+Once started, the application will be available at `http://localhost:8009`.
+
+### 2. Stop the Application
 
 ```bash
-git clone "https://github.com/dsbok/priviblur"
-cd priviblur
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-pybabel compile -d locales -D priviblur
-python -m src.server
+docker compose down -v
 ```
 
 ## Configuration
 
-Configure options by setting environment variables in `docker-compose.yml` or your system environment:
+Settings are configured via environment variables in `docker-compose.yml`:
 
-- `PRIVIBLUR_DEPLOYMENT_HOST`: Host to bind to (default: `0.0.0.0`)
-- `PRIVIBLUR_DEPLOYMENT_PORT`: Internal port to listen on (default: `8000`), must be same as in docker-compose.yml right port
-- `PRIVIBLUR_DEPLOYMENT_DOMAIN`: Domain name of the instance
-- `PRIVIBLUR_DEPLOYMENT_HTTPS`: Force HTTPS cookies/links (true/false)
-- `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of worker instances (speedup loading)
+- `PRIVIBLUR_DEPLOYMENT_PORT`: Internal application port (default: `8000`).
+- `PRIVIBLUR_DEPLOYMENT_HTTPS`: Set to `true` to enable HTTPS secure cookies.
+- `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of web worker processes.
+- `PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME`: Default theme (default: `dark`).
 
 ## License
 
