@@ -39,7 +39,6 @@ Settings are configured via environment variables in `docker-compose.yml`:
 - `PRIVIBLUR_DEPLOYMENT_PORT`: Internal application port (default: `8000`).
 - `PRIVIBLUR_DEPLOYMENT_HTTPS`: Set to `true` to enable HTTPS secure cookies.
 - `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of web worker processes.
-- `PRIVIBLUR_DEFAULT_USER_PREFERENCES_THEME`: Default theme (default: `dark`).
 - `PRIVIBLUR_TUMBLR_AUTHORIZATION`: Optional personal Tumblr OAuth/Bearer authorization token (allows viewing blogs that require logging in).
 
 ## License
