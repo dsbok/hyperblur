@@ -37,9 +37,16 @@ class TumblrAPI:
         if not client:
             main_request_timeout = aiohttp.ClientTimeout(main_request_timeout)
 
+            import os
+            headers = cls.DEFAULT_HEADERS.copy()
+            if auth_override := os.environ.get("PRIVIBLUR_TUMBLR_AUTHORIZATION"):
+                if not auth_override.startswith("Bearer "):
+                    auth_override = f"Bearer {auth_override}"
+                headers["authorization"] = auth_override
+
             client = aiohttp.ClientSession(
                 "https://www.tumblr.com",
-                headers=cls.DEFAULT_HEADERS,
+                headers=headers,
                 timeout=main_request_timeout,  # TODO allow fine-tuning the different types of timeouts
             )
 

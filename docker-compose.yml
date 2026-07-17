@@ -10,3 +10,5 @@ services:
       - PRIVIBLUR_DEPLOYMENT_PORT=8000
       - PRIVIBLUR_DEPLOYMENT_HTTPS=true
       - PRIVIBLUR_DEPLOYMENT_WORKERS=4
+      # Uncomment to allow viewing blogs that require being logged in
+      # - PRIVIBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
