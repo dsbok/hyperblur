@@ -1,6 +1,6 @@
 services:
   priviblur:
-    image: ghcr.io/dsbok/priviblur:latest
+    image: ghcr.io/dsbok/priviblur:master
     container_name: priviblur
     restart: unless-stopped
     ports:
