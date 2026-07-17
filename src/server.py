@@ -181,9 +181,14 @@ for route in routes.BLUEPRINTS:
 error_handlers.register(app)
 
 if __name__ == "__main__":
+    import logging
+    logging.basicConfig(level=logging.WARNING)
+    logging.getLogger("sanic.access").setLevel(logging.WARNING)
+
     app.run(
         host=config.deployment.host,
         port=config.deployment.port,
         workers=config.deployment.workers,
         dev=config.misc.dev_mode,
+        access_log=False,
     )
