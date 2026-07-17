@@ -2,6 +2,12 @@
 
 Priviblur is an alternative, lightweight, privacy-focused frontend to Tumblr. It proxies requests to Tumblr so you can browse without tracking, has no account requirements, and works without Javascript.
 
+## Features
+
+- Image and video proxying
+- Video download button
+- Anonymous browsing
+
 ## Installation
 
 ### Docker
