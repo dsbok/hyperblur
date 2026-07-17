@@ -88,87 +88,87 @@ body {
 
 /* Color definitions */
 body {
-    --color-background: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-800));
-    --color-top-level-card-bg: var(--light, var(--color-gray-0)) var(--dark, var(--color-dt-gray-600));
-    --color-text: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
+    --color-background: #07080a;
+    --color-top-level-card-bg: #0f1115;
+    --color-text: #f1f3f5;
 
-    --color-nav-bar-icon: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-200));
-    --color-nav-bar-icon-hover: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-500));;
-    --color-nav-bar-selected-tab-highlight: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-600));
-    --color-search-icon-fill: var(--light, var(--color-gray-500)) var(--dark, var(--color-gray-600));
-    --color-search-bar-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-550));
-    --color-logo: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-500));
+    --color-nav-bar-icon: #9ca3af;
+    --color-nav-bar-icon-hover: rgba(255,255,255,0.08);
+    --color-nav-bar-selected-tab-highlight: #6366f1;
+    --color-search-icon-fill: #6b7280;
+    --color-search-bar-bg: #15181f;
+    --color-logo: #6366f1;
 
-    --color-footer-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
+    --color-footer-text: #6b7280;
 
-    --color-community-label-text: var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-100));
-    --color-community-label-button-text: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-200));
-    --color-community-label-button-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-400));
-    --color-community-label-button-highlight: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-300));
-    --color-community-label-button-hover: var(--light, rgba(0,0,0,0.03)) var(--dark, rgba(255,255,255,0.05));
-    --color-community-label-gradient-1: var(--light, var(--color-gray-0)) var(--dark, hsl(41, 4%, 9%));
-    --color-community-label-gradient-2: var(--light, rgba(255,255,255,0.7)) var(--dark, hsla(0,0%,0%,0.7));
+    --color-community-label-text: #f1f3f5;
+    --color-community-label-button-text: #f1f3f5;
+    --color-community-label-button-bg: #1f2937;
+    --color-community-label-button-highlight: #374151;
+    --color-community-label-button-hover: rgba(255,255,255,0.08);
+    --color-community-label-gradient-1: #0f1115;
+    --color-community-label-gradient-2: rgba(15,17,21,0.9);
 
-    --color-post-blog-name: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-100));
-    --color-reblog-attribution: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
-    --color-post-link-block-subtitle: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
-    --color-post-header-date-separator: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
+    --color-post-blog-name: #f1f3f5;
+    --color-reblog-attribution: #9ca3af;
+    --color-post-link-block-subtitle: #9ca3af;
+    --color-post-header-date-separator: #6b7280;
 
-    --color-ask-header: var(--light, var(--color-gray-800)) var(--dark, var(--color-dt-gray-225));
-    --color-ask-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-525));
+    --color-ask-header: #d1d5db;
+    --color-ask-bg: #15181f;
 
-    --color-post-img-alt-text-widget-bg: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-600));
-    --color-post-img-alt-text-widget-text: var(--light, var(--color-gray-100)) var(--dark, var(--color-text));
+    --color-post-img-alt-text-widget-bg: #15181f;
+    --color-post-img-alt-text-widget-text: #f1f3f5;
 
-    --color-poll-text-color: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
-    --color-poll-winner-bg: var(--light, var(--color-primary-300)) var(--dark, var(--color-primary-700));
-    --color-poll-proportion-bar-bg: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-300));
-    --color-poll-choice-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-500));
+    --color-poll-text-color: #f1f3f5;
+    --color-poll-winner-bg: #4338ca;
+    --color-poll-proportion-bar-bg: #374151;
+    --color-poll-choice-bg: #1f2937;
 
-    --color-post-reveal-truncated-content-button: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-650));
-    --color-post-reveal-truncated-content-button-hover: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-600));
+    --color-post-reveal-truncated-content-button: #6366f1;
+    --color-post-reveal-truncated-content-button-hover: #4f46e5;
 
-    --color-post-footer: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
-    --color-post-footer-post-interaction: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-225));
-    --color-post-tag-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-575));
-    --color-post-tag-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-500));
+    --color-post-footer: #9ca3af;
+    --color-post-footer-post-interaction: #9ca3af;
+    --color-post-tag-bg: #15181f;
+    --color-post-tag-hover: #1e2330;
 
-    --color-trail-post-separator: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-400));
+    --color-trail-post-separator: rgba(255, 255, 255, 0.06);
 
-    --color-post-notes-viewer-nav-bar-bg: var(--light, var(--color-gray-150)) var(--dark, var(--color-dt-gray-550));
-    --color-post-notes-viewer-nav-bar-item: var(--light, var(--color-gray-600)) var(--dark, var(--color-dt-gray-250));
-    --color-reblog-note-separator: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-300));
+    --color-post-notes-viewer-nav-bar-bg: #15181f;
+    --color-post-notes-viewer-nav-bar-item: #9ca3af;
+    --color-reblog-note-separator: rgba(255, 255, 255, 0.06);
 
-    --color-primary-button-bg: var(--light, var(--color-primary-500)) var(--dark, var(--color-primary-600));
-    --color-primary-button-hover: var(--light, var(--color-primary-600)) var(--dark, var(--color-primary-700));
-    --color-primary-button-text: var(--light, var(--color-primary-100)) var(--dark, var(--color-primary-100));
+    --color-primary-button-bg: #6366f1;
+    --color-primary-button-hover: #4f46e5;
+    --color-primary-button-text: #ffffff;
 
-    --color-secondary-button-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-500));
-    --color-secondary-button-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-600));
-    --color-button-secondary-text: var(--light, var(--color-gray-800)) var(--dark, var(--color-gray-200));
+    --color-secondary-button-bg: #1c1f26;
+    --color-secondary-button-hover: #282c37;
+    --color-button-secondary-text: #f1f3f5;
 
-    --color-tertiary-button-color: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-250));
+    --color-tertiary-button-color: #9ca3af;
     
-    --color-dropdown-menu-bg: var(--light, var(--color-gray-100)) var(--dark, var(--color-dt-gray-550));
-    --color-dropdown-action-select: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
-    --color-dropdown-action-hover: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-500));
-    --color-control-bar-action-text: var(--light, var(--color-gray-600)) var(--dark, var(--color-gray-500));
-    --color-dropdown-menu-item-selected: var(--light, var(--color-gray-250)) var(--dark, var(--color-dt-gray-475));
-    --color-dropdown-menu-item-hover: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-400));
+    --color-dropdown-menu-bg: #0f1115;
+    --color-dropdown-action-select: #1c1f26;
+    --color-dropdown-action-hover: #1c1f26;
+    --color-control-bar-action-text: #9ca3af;
+    --color-dropdown-menu-item-selected: #1c1f26;
+    --color-dropdown-menu-item-hover: #1e2330;
 
-    --color-blog-header-blog-name: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-200));
-    --color-setting-top-heading: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
-    --color-setting-option-separator: var(--light, var(--color-gray-175)) var(--dark, var(--color-dt-gray-450));
-    --color-setting-option: var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-100));
-    --color-setting-option-desc: var(--light, var(--color-gray-500)) var(--dark, var(--color-dt-gray-250));
-    --color-settings-theme-select-outline: var(--light, var(--color-primary-400)) var(--dark, var(--color-primary-400));
-    --color-settings-dropdown-option-bg: var(--light, var(--color-gray-200)) var(--dark, var(--color-dt-gray-400));
+    --color-blog-header-blog-name: #9ca3af;
+    --color-setting-top-heading: #f1f3f5;
+    --color-setting-option-separator: rgba(255, 255, 255, 0.06);
+    --color-setting-option: #f1f3f5;
+    --color-setting-option-desc: #9ca3af;
+    --color-settings-theme-select-outline: #6366f1;
+    --color-settings-dropdown-option-bg: #15181f;
 
-    --tumblr-signpost-bg: var(--light, var(--color-gray-125)) var(--dark, var(--color-dt-gray-700));
-    --tumblr-signpost-border: var(--light, var(--color-gray-300)) var(--dark, var(--color-dt-gray-500));
+    --tumblr-signpost-bg: #0f1115;
+    --tumblr-signpost-border: rgba(255, 255, 255, 0.08);
 
-    --color-alert-show-error-details:  var(--light, var(--color-gray-700)) var(--dark, var(--color-dt-gray-250));
-    --color-alert-show-error-details-hover:  var(--light, var(--color-gray-900)) var(--dark, var(--color-dt-gray-250));
+    --color-alert-show-error-details: #9ca3af;
+    --color-alert-show-error-details-hover: #f1f3f5;
 }
 
 html, body, .container {

@@ -2,31 +2,30 @@
 **Project ID:** dsbok/priviblur
 
 ## 1. Visual Theme & Atmosphere
-Priviblur uses a sleek, high-contrast dark mode to deliver a distraction-free Tumblr browsing experience. The design philosophy centers on content density, crisp typography, and fluid micro-transitions. It balances a clean, utilitarian aesthetic with premium, warm accents to make the browsing experience feel rich and modern.
+Priviblur uses an immersive "Deep Space" dark mode approach. The atmosphere is dense, clean, and highly futuristic, pairing deep dark slate surfaces with vibrant neon Indigo accents. This ensures high-contrast readability, absolute zero-lag visual feedback, and a premium web application presence.
 
 ## 2. Color Palette & Roles
-The design relies on a curated HSL color palette to control contrast and visual weight:
+The layout uses HSL-crafted dark mode gradients:
 
-* **Primary Background** (`#0b0a0a` / `hsl(41, 5%, 4%)`): Ultra-dark charcoal backdrop for the page to focus attention on timeline content.
-* **Card & Post Container Background** (`#171615` / `hsl(41, 2%, 7%)`): Muted dark slate, providing structure and separating individual posts.
-* **Secondary Highlight/Hover** (`#232120` / `hsl(41, 2%, 10.5%)`): Soft accent layer for hover states, active inputs, and dropdown options.
-* **Primary Accent** (`#e6952e` / `hsl(36, 80%, 50%)`): Warm, vibrant golden-amber used for call-to-actions, the main navigation highlight, and branding.
-* **Primary Text** (`#cccccc` / `hsl(41, 7%, 80%)`): Soft off-white to prevent eye strain while preserving high readability.
-* **Secondary Text** (`#807c79` / `hsl(41, 3%, 50%)`): Dark gray for metadata, timestamp links, and footer info.
+* **Primary Background** (`#07080a` / `hsl(220, 25%, 3%)`): Deep space dark canvas focusing user focus entirely on content.
+* **Card & Post Container Background** (`#0f1115` / `hsl(220, 18%, 7%)`): Dark slate gray, enclosing post contents.
+* **Secondary Highlight/Hover** (`#181c24` / `hsl(220, 18%, 11%)`): Sleek hover fill for interactive components and background inputs.
+* **Primary Accent** (`#6366f1` / `hsl(238, 83%, 66%)`): Vibrant electric indigo for logos, active state indicator highlights, and prominent CTA actions.
+* **Primary Text** (`#f1f3f5` / `hsl(210, 17%, 95%)`): Off-white for clean contrast and zero eye fatigue.
+* **Secondary Text** (`#9ca3af` / `hsl(220, 9%, 65%)`): Muted gray for timestamps, tags, and secondary metadata descriptions.
 
 ## 3. Typography Rules
-* **Font Family:** Modern system-sans stack (`system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`) to ensure instant loading and consistent rendering across devices.
+* **Font Family:** Modern typography stack (`"Inter", system-ui, -apple-system, sans-serif`).
 * **Weights:**
-  * Bold (`700`): Used for headings, post titles, and branding.
-  * Medium (`500`): Used for interactive tabs, button labels, and tags.
-  * Regular (`400` / `450`): Used for post descriptions and body text.
-* **Line Height:** Relaxed line height (`1.5`) for readable text blocks.
+  * Bold (`700`): Headers, blog branding, and post titles.
+  * Medium (`500`): Interactive buttons, tabs, and tag elements.
+  * Regular (`400`): Timeline descriptions, body copy, and comments.
 
 ## 4. Component Stylings
-* **Buttons:** Rectangular with clean, subtly rounded corners (`border-radius: 6px`). They use smooth opacity and background color transitions (`transition: all 0.2s ease-in-out`).
-* **Cards/Containers:** Frameless with slight corner roundness (`border-radius: 10px`), clean borders (`1px solid hsl(41, 2%, 12%)`), and very subtle glow outlines instead of heavy shadows.
-* **Inputs & Search Bars:** Rounded container inputs with inset backgrounds, clean outline-free focus rings utilizing the golden-amber primary accent color.
+* **Buttons**: Rounded buttons (`border-radius: 6px`) with active scale-in transitions (`transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1)`).
+* **Cards/Containers**: Framed with rounded corners (`border-radius: 12px`), borders (`1px solid rgba(255, 255, 255, 0.05)`), and a smooth hover float transition.
+* **Search & Form Inputs**: Curved input capsules using custom inset backgrounds and neon-indigo focus highlights (`box-shadow: 0 0 0 3px hsla(238, 83%, 66%, 0.15)`).
 
 ## 5. Layout Principles
-* **Timeline Density:** Timelines are constrained to a maximum content width of `640px` to maintain a readable vertical reading flow.
-* **Whitespace Strategy:** Tight but consistent margins (`16px` on mobile, `24px` on desktop) to optimize content density without feeling cluttered.
+* **Timeline Constraint**: Kept centered at `640px` maximum width.
+* **Whitespace**: Balanced padding sizes (`16px` mobile, `24px` desktop) to maintain high density without layout collision.
