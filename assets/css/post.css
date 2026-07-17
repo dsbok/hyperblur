@@ -5,8 +5,8 @@
   padding: 25px 25px;
   background: var(--color-top-level-card-bg);
   border-radius: 0px;
-  border: 2px solid #ffffff;
-  box-shadow: 6px 6px 0px #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: 3px 3px 0px #ffffff;
   width: 100%;
   box-sizing: border-box;
 }
@@ -323,8 +323,8 @@ a.hidden-reblog {
   flex-direction: column;
   gap: 25px;
   border-radius: 0px;
-  border: 2px solid #ffffff;
-  box-shadow: 6px 6px 0px #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: 3px 3px 0px #ffffff;
   padding: 15px 15px 25px;
 }
 
@@ -337,7 +337,7 @@ a.hidden-reblog {
   padding: 0 20px;
   background: var(--color-post-notes-viewer-nav-bar-bg);
   border-radius: 0px;
-  border: 2px solid #ffffff;
+  border: 1px solid #ffffff;
   margin: 0 15px;
 }
 

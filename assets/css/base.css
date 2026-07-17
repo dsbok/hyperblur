@@ -264,8 +264,8 @@ a.logo {
     border-radius: 0px;
     padding: 10px 10px;
     background: var(--color-search-bar-bg);
-    border: 2px solid #ffffff;
-    box-shadow: 3px 3px 0px #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 2px 2px 0px #ffffff;
     transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
 }
 
@@ -286,7 +286,7 @@ a.logo {
     border-color: #ffffff;
     background-color: #facc15;
     box-shadow: 0px 0px 0px;
-    transform: translate(3px, 3px);
+    transform: translate(2px, 2px);
 }
 
 .search-bar:focus-within input {
@@ -390,9 +390,9 @@ a.logo {
     letter-spacing: 0.3px;
     font-weight: 700;
     font-size: 14px;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 0px;
-    box-shadow: 3px 3px 0px #ffffff;
+    box-shadow: 2px 2px 0px #ffffff;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
     cursor: pointer;
     font-family: inherit;
@@ -400,12 +400,12 @@ a.logo {
 }
 
 .button:hover {
-    transform: translate(3px, 3px);
+    transform: translate(2px, 2px);
     box-shadow: 0px 0px 0px;
 }
 
 .button:active {
-    transform: translate(3px, 3px);
+    transform: translate(2px, 2px);
     box-shadow: 0px 0px 0px;
 }
 
