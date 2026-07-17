@@ -7,8 +7,8 @@
   <a href="https://hosted.weblate.org/engage/priviblur/">
     <img src="https://hosted.weblate.org/widget/priviblur/svg-badge.svg" alt="Translation status" />
   </a>
-  <a href="https://github.com/syeopite/priviblur/commits/master">
-    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/syeopite/priviblur?color=e69419&label=commits">
+  <a href="https://github.com/dsbok/priviblur/commits/master">
+    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/dsbok/priviblur?color=e69419&label=commits">
   </a>
   </div>
   <blockquote> <h4> Inspired by projects like <a href="https://github.com/iv-org/invidious"> Invidious</a></h4> </blockquote>
@@ -39,7 +39,7 @@ Priviblur has no official instance
 
 ### Docker
 
-You can install Priviblur through the official docker images here: https://quay.io/repository/syeopite/priviblur
+You can install Priviblur through the official docker images here: ghcr.io/dsbok/priviblur
 
 A compose file to use this image is provided in the repository.
 
@@ -52,7 +52,7 @@ Configuration is then done by editing environment variables directly in `docker-
 
 ```bash
 
-git clone "https://github.com/syeopite/priviblur"
+git clone "https://github.com/dsbok/priviblur"
 cd priviblur 
 
 git checkout "v0.3.0"

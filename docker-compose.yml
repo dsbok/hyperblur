@@ -1,6 +1,6 @@
 services:
   priviblur:
-    image: quay.io/syeopite/priviblur:latest
+    image: ghcr.io/dsbok/priviblur:latest
     container_name: priviblur
     restart: unless-stopped
     ports:
