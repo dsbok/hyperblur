@@ -43,6 +43,7 @@ app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", 
 
 app.ctx.PRIVIBLUR_CONFIG = config
 app.ctx.translate = i18n.translate
+app.ctx.CURRENT_COMMIT = os.environ.get("PRIVIBLUR_CURRENT_COMMIT", "1.0.0")
 
 app.ctx.PRIVIBLUR_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 app.ctx.create_user_friendly_error_message = error_handlers.create_user_friendly_error_message
