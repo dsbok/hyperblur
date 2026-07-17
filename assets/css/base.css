@@ -94,10 +94,10 @@ body {
 
     --color-nav-bar-icon: #8e8e93;
     --color-nav-bar-icon-hover: rgba(255,255,255,0.06);
-    --color-nav-bar-selected-tab-highlight: #0a84ff;
+    --color-nav-bar-selected-tab-highlight: #ffffff;
     --color-search-icon-fill: #8e8e93;
     --color-search-bar-bg: rgba(44, 44, 46, 0.75);
-    --color-logo: #0a84ff;
+    --color-logo: #ffffff;
 
     --color-footer-text: #8e8e93;
 
@@ -121,12 +121,12 @@ body {
     --color-post-img-alt-text-widget-text: #ffffff;
 
     --color-poll-text-color: #ffffff;
-    --color-poll-winner-bg: #0a84ff;
+    --color-poll-winner-bg: rgba(255, 255, 255, 0.25);
     --color-poll-proportion-bar-bg: rgba(58, 58, 60, 0.8);
     --color-poll-choice-bg: rgba(44, 44, 46, 0.6);
 
-    --color-post-reveal-truncated-content-button: #0a84ff;
-    --color-post-reveal-truncated-content-button-hover: #0071e3;
+    --color-post-reveal-truncated-content-button: #ffffff;
+    --color-post-reveal-truncated-content-button-hover: #8e8e93;
 
     --color-post-footer: #8e8e93;
     --color-post-footer-post-interaction: #8e8e93;
@@ -139,9 +139,9 @@ body {
     --color-post-notes-viewer-nav-bar-item: #8e8e93;
     --color-reblog-note-separator: rgba(255, 255, 255, 0.08);
 
-    --color-primary-button-bg: #0a84ff;
-    --color-primary-button-hover: #0071e3;
-    --color-primary-button-text: #ffffff;
+    --color-primary-button-bg: #ffffff;
+    --color-primary-button-hover: #e5e5ea;
+    --color-primary-button-text: #000000;
 
     --color-secondary-button-bg: #2c2c2e;
     --color-secondary-button-hover: #3a3a3c;
@@ -161,7 +161,7 @@ body {
     --color-setting-option-separator: rgba(255, 255, 255, 0.08);
     --color-setting-option: #ffffff;
     --color-setting-option-desc: #8e8e93;
-    --color-settings-theme-select-outline: #0a84ff;
+    --color-settings-theme-select-outline: #ffffff;
     --color-settings-dropdown-option-bg: rgba(44, 44, 46, 0.75);
 
     --tumblr-signpost-bg: rgba(28, 28, 30, 0.75);
@@ -283,7 +283,7 @@ a.logo {
 
 .search-bar:focus-within {
     border-color: var(--color-primary-500);
-    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
 }
 
 .search-bar .icon path {
@@ -396,13 +396,13 @@ a.logo {
 
 .primary.button, a.primary.button {
     color: var(--color-primary-button-text);
-    background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 50%, #af52de 100%);
-    box-shadow: 0 4px 12px rgba(94, 92, 230, 0.3);
+    background: var(--color-primary-button-bg);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
 }
 
 .primary.button:hover {
-    background: linear-gradient(135deg, #0071e3 0%, #4b49c7 50%, #943bbd 100%);
-    box-shadow: 0 6px 16px rgba(94, 92, 230, 0.45);
+    background: var(--color-primary-button-hover);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
 }
 
 .secondary.button {

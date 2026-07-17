@@ -1,31 +1,32 @@
-# Design System: Priviblur (iOS 26 SwiftUI HIG)
+# Design System: Priviblur (Minimalist Monochrome)
 **Project ID:** dsbok/priviblur
 
 ## 1. Visual Theme & Atmosphere
-The design leverages a futuristic Apple iOS 26 / SwiftUI glassmorphic theme. It places deep, translucent, frosted-glass post layers over a pure OLED black space backdrop. Depth is defined by physical layer stacking, fine light borders, and fluid SwiftUI-inspired spring transitions. System-wide SF Pro typography ensures clean legibility.
+The layout follows a high-contrast, minimalist, and purely monochrome Apple Dark Mode aesthetic. It eliminates all colors in favor of a clean, sophisticated scale of black, white, and neutral grays. Visual priority is achieved through font weight hierarchy, spacing contrast, and clean layout geometry.
 
 ## 2. Color Palette & Roles
-Colors represent Apple's futuristic visionOS/iOS system color rules:
+Colors are strictly limited to a neutral greyscale spectrum:
 
-* **Backdrop Space Canvas** (`#000000` / `hsl(0, 0%, 0%)`): OLED true black.
-* **Translucent Frosted Card** (`rgba(28, 28, 30, 0.75)`): Translucent system gray sheet with a `20px` backdrop blur for post card grouping.
-* **Translucent Ask/Secondary Sheet** (`rgba(44, 44, 46, 0.75)`): Translucent nested sheet with a `12px` backdrop blur.
-* **Holographic SwiftUI Primary (Accent)** (`linear-gradient(135deg, #0a84ff 0%, #5e5ce6 50%, #af52de 100%)`): Dynamic gradient from Apple System Blue, through System Indigo, to System Purple, used for branding, interactive tabs, and primary action buttons.
-* **Label Primary** (`#ffffff` / `hsl(0, 0%, 100%)`): Pure white text.
-* **Label Secondary** (`#98989d` / `hsl(240, 2%, 60%)`): Apple system gray for timestamps, tags, and secondary metadata descriptions.
+* **System Canvas** (`#000000` / `hsl(0, 0%, 0%)`): Pure black backdrop.
+* **Frosted Card** (`rgba(28, 28, 30, 0.75)`): Translucent dark gray card base.
+* **Secondary Sheet (Ask BG / Input BG)** (`rgba(44, 44, 46, 0.75)`): Translucent neutral gray.
+* **Active Indicator / High Contrast Accent** (`#ffffff` / `hsl(0, 0%, 100%)`): Pure white, used for branding logos, primary highlights, and active tabs.
+* **Label Primary** (`#ffffff` / `hsl(0, 0%, 100%)`): High-contrast white for headers and main body text.
+* **Label Secondary** (`#8e8e93` / `hsl(240, 2%, 56%)`): System gray for timestamps, tag labels, and metadata.
+* **Inactive Accent / Border** (`rgba(255, 255, 255, 0.08)`): Subtle gray borders and separators.
 
 ## 3. Typography Rules
-* **Font Family:** Apple System Stack (`-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif`).
+* **Font Family:** System sans-serif font stack (`-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif`).
 * **Tracking & Weights:**
-  * Semibold (`600`) and Heavy (`800`) for headers, mimicking SwiftUI text stylings.
-  * Regular (`400`) for body copy, with `letter-spacing: -0.15px`.
-  * Relaxed line-height (`1.5`) for posts.
+  * Heavy (`800`) and Bold (`700`) weights represent headers and blog branding.
+  * Regular (`400`) weight for post body texts.
+  * Letter spacing is set to `-0.15px` to keep letters dense and high-end.
 
 ## 4. Component Stylings
-* **Buttons**: Rounded SwiftUI pills (`border-radius: 12px` or `20px` depending on container) styled with the Holographic Blue-Indigo-Purple gradient.
-* **Cards/Containers**: Layered glass sheets (`border-radius: 16px`), outlined with a hairline light border (`1px solid rgba(255, 255, 255, 0.1)`), featuring a backdrop filter blur.
-* **Avatar squircle**: Apple squircle (`border-radius: 12px`) with hover gaze-scaling.
+* **Buttons**: Pill-shaped or rounded capsules. Primary buttons use a solid white background with pure black text (`#000000`). Secondary buttons use a dark gray background (`rgba(255, 255, 255, 0.08)`) with white text.
+* **Cards/Containers**: Frameless glass containers with `16px` rounded corners, thin outline borders (`1px solid rgba(255, 255, 255, 0.08)`), and flat depth.
+* **Inputs & Search**: Translucent search bar capsules (`border-radius: 10px`) utilizing `#2c2c2e` background with a thin white outline highlight on focus.
 
 ## 5. Layout Principles
-* **Timeline Width**: Limited to a dense `640px` timeline.
-* **Spring Animations**: Hover transitions use iOS system spring curves (`cubic-bezier(0.16, 1, 0.3, 1)` / duration `0.3s`).
+* **Timeline Constraint**: Confined to a maximum content width of `640px`.
+* **Density**: Spacious vertical flow with consistent paddings to emphasize minimalism.
