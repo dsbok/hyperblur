@@ -34,7 +34,6 @@ Essential settings in `docker-compose.yml`:
 - `PRIVIBLUR_DEPLOYMENT_PORT`: Internal container port (default: `8000`).
 - `PRIVIBLUR_DEPLOYMENT_HTTPS`: Enables HTTPS secure cookies (default: `true`).
 - `PRIVIBLUR_DEPLOYMENT_WORKERS`: Number of web worker processes (default: `4`).
-- `PRIVIBLUR_CURRENT_COMMIT`: Version query parameter for asset cache-busting.
 - `PRIVIBLUR_TUMBLR_AUTHORIZATION`: Optional Tumblr OAuth/Bearer token to view private or log-in restricted blogs.
 
 ## 📄 License
