@@ -1,8 +1,6 @@
 services:
   hyperblur:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/dsbok/hyperblur:main
     container_name: hyperblur
     restart: unless-stopped
     ports:
@@ -14,4 +12,3 @@ services:
       - HYPERBLUR_DEPLOYMENT_WORKERS=4
       # Uncomment to allow viewing blogs that require being logged in
       # - HYPERBLUR_TUMBLR_AUTHORIZATION=Bearer YOUR_TOKEN_HERE
-
