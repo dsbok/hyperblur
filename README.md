@@ -1,6 +1,6 @@
 # Hyperblur
 
-Hyperblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking, without an account, and with zero external CDNs or heavy frameworks.
+Hyperblur is a ultra-fast, privacy-focused, lightweight alternative frontend for Tumblr. Built for maximum speed, security, and anonymity, it lets you browse Tumblr content without tracking, without an account, and with zero external CDNs or heavy frameworks. Hyperblur is a fork of https://github.com/syeopite/priviblur but with improvements.
 
 ## Core Highlights & Features
 
