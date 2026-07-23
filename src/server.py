@@ -39,7 +39,10 @@ app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
 
 app.ctx.URL_HANDLER = helpers.url_handler
-app.ctx.BLACKLIST_RESPONSE_HEADERS = ("access-control-allow-origin", "alt-svc", "server")
+app.ctx.BLACKLIST_RESPONSE_HEADERS = frozenset({"access-control-allow-origin", "alt-svc", "server"})
+
+# ponytail: pre-computed static CSP header string -> dynamic header builder
+STATIC_CSP_HEADER = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; media-src 'self'; child-src 'self' blob:"
 
 app.ctx.HYPERBLUR_CONFIG = config
 app.ctx.translate = i18n.translate
@@ -162,20 +165,8 @@ async def after_all_routes(request, response):
     response.headers["x-xss-protection"] = "1; mode=block"
     response.headers["x-content-type-options"] = "nosniff"
     response.headers["referrer-policy"] = "same-origin"
+    response.headers["content-security-policy"] = STATIC_CSP_HEADER
 
-    response.headers["content-security-policy"] = "; ".join(
-        [
-            "default-src 'none'",
-            "script-src 'self'",
-            "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' data:",
-            "font-src 'self' data:",
-            "connect-src 'self'",
-            "manifest-src 'self'",
-            "media-src 'self'",
-            "child-src 'self' blob:",
-        ]
-    )
 
 
 # Register all routes:

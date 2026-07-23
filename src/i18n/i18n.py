@@ -26,14 +26,19 @@ def initialize_locales() -> typing.Mapping[str, Language]:
     return {locale: Language(locale) for locale in SUPPORTED_LANGUAGES}
 
 
+# ponytail: pre-fetch default translation dict -> dynamic dictionary lookup on every fallback
+EN_US_TRANSLATIONS = TRANSLATIONS.get("en_US", {})
+
 def translate(
     language: str,
     id: str,
     number: int | float | None = None,
     substitution: str | dict | None = None,
 ) -> str:
-    lang_dict = TRANSLATIONS.get(language, TRANSLATIONS.get("en_US", {}))
-    raw_val = lang_dict.get(id, TRANSLATIONS.get("en_US", {}).get(id, id))
+    lang_dict = TRANSLATIONS.get(language, EN_US_TRANSLATIONS)
+    raw_val = lang_dict.get(id)
+    if raw_val is None:
+        raw_val = EN_US_TRANSLATIONS.get(id, id)
 
     if isinstance(raw_val, (tuple, list)):
         index = 0 if (number == 1 or number == 1.0) else 1
@@ -49,4 +54,5 @@ def translate(
         translated = translated.format(number)
 
     return translated
+
 
