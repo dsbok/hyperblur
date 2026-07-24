@@ -2,7 +2,6 @@ import dataclasses
 
 @dataclasses.dataclass
 class UserPreferences:
-    # See DefaultUserPreferences in config/user_preferences.py
     language: str
     theme: str
     expand_posts: bool

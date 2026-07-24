@@ -3,7 +3,6 @@ import sys
 import tomllib
 from typing import NamedTuple, Optional, Union
 
-# ponytail: consolidated single-file config module -> multi-file config directory
 class DeploymentConfig(NamedTuple):
     host: str = "127.0.0.1"
     port: int = 8080

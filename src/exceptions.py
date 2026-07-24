@@ -3,7 +3,6 @@ import traceback
 import sanic
 import sanic.exceptions
 
-# ponytail: consolidated single-file exceptions module -> multi-file exception directory
 class TumblrInvalidRedirect(Exception):
     pass
 
@@ -55,7 +54,6 @@ def create_user_friendly_error_message(request, exception):
 extractor_errors = ErrorHandlerGroup()
 miscellaneous_errors = ErrorHandlerGroup()
 
-# Import extractor exceptions dynamically when registered
 def register_extractor_handlers(hyperblur_exceptions):
     @extractor_errors.register(hyperblur_exceptions.TumblrLoginRequiredError)
     async def tumblr_error_login_walled(request, exception):

@@ -6,13 +6,11 @@ import functools
 import sanic
 import aiohttp
 import orjson
-
 from npf_renderer import VERSION as NPF_RENDERER_VERSION
 
 from . import routes, hyperblur_extractor, preferences, helpers, exceptions
 from .config import load_config
 
-# ponytail: single-file server entrypoint & direct English string mapping
 
 ENGLISH_STRINGS = {
     "project_title": "Hyperblur",
@@ -152,7 +150,6 @@ def translate_english(lang, key, number=None, substitution=None):
         return val.format(number)
     return str(val)
 
-# Load configuration file
 config = load_config(os.environ.get("HYPERBLUR_CONFIG_LOCATION", "./config.toml"))
 
 app = sanic.Sanic(
@@ -166,13 +163,11 @@ app.config.OAS = False
 app.ctx.LANGUAGES = {"en_US": type("Lang", (), {"name": "English"})()}
 app.ctx.SUPPORTED_LANGUAGES = ["en_US"]
 
-# Constants
 app.config.TEMPLATING_PATH_TO_TEMPLATES = "src/templates"
 app.ctx.NPF_RENDERER_VERSION = NPF_RENDERER_VERSION
 app.ctx.URL_HANDLER = helpers.url_handler
 app.ctx.BLACKLIST_RESPONSE_HEADERS = frozenset({"access-control-allow-origin", "alt-svc", "server"})
 
-# ponytail: pre-computed static CSP header string -> dynamic header builder
 STATIC_CSP_HEADER = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; media-src 'self'; child-src 'self' blob:"
 
 app.ctx.HYPERBLUR_CONFIG = config
@@ -189,7 +184,22 @@ async def initialize(app):
         main_request_timeout=hyperblur_backend.main_response_timeout, json_loads=orjson.loads
     )
 
+    media_request_headers = {
+        "user-agent": hyperblur_extractor.TumblrAPI.DEFAULT_HEADERS["user-agent"],
+        "accept-encoding": "gzip, deflate",
+        "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+        "accept-language": "en-US,en;q=0.5",
+        "connection": "keep-alive",
+        "te": "trailers",
+        "referer": "https://www.tumblr.com/",
+    }
 
+    media_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
+    app.ctx.MediaClient = aiohttp.ClientSession(
+        headers=media_request_headers,
+        timeout=aiohttp.ClientTimeout(hyperblur_backend.image_response_timeout),
+        connector=media_connector,
+    )
 
     at_connector = aiohttp.TCPConnector(use_dns_cache=True, ttl_dns_cache=600, limit=300, limit_per_host=100, enable_cleanup_closed=True)
     app.ctx.TumblrAtClient = aiohttp.ClientSession(
@@ -202,7 +212,6 @@ async def initialize(app):
     app.ctx.CacheDb = None
     app.ctx.render = helpers.render_template
 
-    # Add additional jinja filters and functions
     app.ext.environment.add_extension("jinja2.ext.do")
     app.ext.environment.filters["encodepathsegment"] = functools.partial(urllib.parse.quote, safe="")
     app.ext.environment.filters["update_query_params"] = helpers.update_query_params
@@ -210,8 +219,8 @@ async def initialize(app):
     app.ext.environment.filters["deseq_urlencode"] = helpers.deseq_urlencode
     app.ext.environment.filters["ensure_single_prefix_slash"] = helpers.prefix_slash_in_url_if_missing
     app.ext.environment.filters["format_decimal"] = lambda x, **kw: f"{x:,}"
-    app.ext.environment.filters["format_date"] = lambda d, **kw: d.strftime('%b %d, %Y')
-    app.ext.environment.filters["format_datetime"] = lambda d, **kw: d.strftime('%b %d, %Y %H:%M')
+    app.ext.environment.filters["format_date"] = lambda d, **kw: d.strftime("%b %d, %Y")
+    app.ext.environment.filters["format_datetime"] = lambda d, **kw: d.strftime("%b %d, %Y %H:%M")
     app.ext.environment.filters["format_list"] = lambda l, **kw: ", ".join(map(str, l))
 
     app.ext.environment.globals["translate"] = translate_english
@@ -229,7 +238,7 @@ async def main_startup_listener(app):
 
 @app.listener("after_server_stop")
 async def cleanup(app, loop):
-
+    await app.ctx.MediaClient.close()
     await app.ctx.TumblrAtClient.close()
     await app.ctx.TumblrAPI.client.close()
 
@@ -261,11 +270,9 @@ async def after_all_routes(request, response):
     response.headers["content-security-policy"] = STATIC_CSP_HEADER
 
 
-# Register all routes:
 for route in routes.BLUEPRINTS:
     app.blueprint(route)
 
-# Register error handlers into Hyperblur
 exceptions.register(app)
 
 if __name__ == "__main__":

@@ -8,12 +8,10 @@ from typing import Optional, Union, NamedTuple, Sequence, List, Tuple
 
 import aiohttp
 
-# ponytail: consolidated single-file extractor module -> multi-file hyperblur_extractor directory
 
 logger = logging.getLogger("hyperblur-extractor")
 logger.setLevel(logging.WARNING)
 
-# Helper function
 def dig_dict(target, keys: List | Tuple):
     for key in keys:
         if isinstance(target, dict):
@@ -23,7 +21,6 @@ def dig_dict(target, keys: List | Tuple):
     return target
 
 
-# Exceptions
 class InitialTumblrAPIParseException(Exception):
     def __init__(self, message):
         super().__init__(message)
@@ -84,7 +81,6 @@ exceptions = ExtractorExceptionsModule()
 hyperblur_exceptions = exceptions
 
 
-# Request Configuration Enums & Fields
 class ExplorePostTypeFilters(enum.Enum):
     TEXT = (0,)
     PHOTOS = (1,)
@@ -129,7 +125,6 @@ TUMBLR_TAG_BLOG_INFO_FIELDS = EXPLORE_BLOG_INFO_FIELDS
 BLOG_SEARCH_BLOG_INFO_FIELDS = EXPLORE_BLOG_INFO_FIELDS
 
 
-# Data Models
 VERSION = 5
 
 class Cursor(NamedTuple):
@@ -524,7 +519,6 @@ class Timeline(NamedTuple):
         return cls(**json)
 
 
-# Models Module sub-namespace compatibility
 class PostModule:
     Post = Post
     PostTrail = PostTrail
@@ -558,7 +552,6 @@ class ExtractorModelsModule:
 models = ExtractorModelsModule()
 
 
-# Parsers
 class BlogParser:
     def __init__(self, target) -> None:
         self.target = target
@@ -1024,7 +1017,6 @@ def parse_note_timeline(initial_data):
     return NoteTimelineParser.process(initial_data["response"])
 
 
-# TumblrAPI Class
 class TumblrAPI:
     DEFAULT_HEADERS = {
         "accept": "application/json;format=camelcase",

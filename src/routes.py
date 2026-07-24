@@ -7,9 +7,7 @@ from npf_renderer.utils import BASIC_LAYOUT_CSS
 
 from src import hyperblur_extractor, exceptions
 
-# ponytail: consolidated single-file routes module -> multi-file routes directory & subdirectories
 
-# 1. Assets Blueprint
 assets = sanic.Blueprint("assets", url_prefix="/assets")
 assets.static("/", "assets")
 
@@ -22,7 +20,6 @@ def add_assets_cache(request, response):
     response.headers["Cache-Control"] = "max-age=2629800, immutable"
 
 
-# 2. Explore Blueprint
 explore = sanic.Blueprint("explore", url_prefix="/explore")
 
 async def _handle_explore(request, endpoint, post_type=None):
@@ -95,10 +92,66 @@ async def _asks(request):
     return await _handle_explore(request, "explore._asks", hyperblur_extractor.ExplorePostTypeFilters.ASKS)
 
 
+media = sanic.Blueprint("TumblrMedia", url_prefix="/tblr")
+
+async def get_media(request, client: aiohttp.ClientSession, path_to_request, additional_headers=None, base_url=""):
+    url = f"{base_url}/{path_to_request}"
+    try:
+        async with client.get(url, headers=additional_headers) as tumblr_response:
+            hyperblur_response_headers = {}
+            for header_key, header_value in tumblr_response.headers.items():
+                if header_key.lower() not in request.app.ctx.BLACKLIST_RESPONSE_HEADERS:
+                    hyperblur_response_headers[header_key] = header_value
+
+            if tumblr_response.status == 200:
+                hyperblur_response_headers["Cache-Control"] = "public, max-age=31536000, immutable"
+            elif tumblr_response.status == 301:
+                if location := hyperblur_response_headers.get("location"):
+                    location = request.app.ctx.URL_HANDLER(location)
+                    if not location.startswith("/"):
+                        raise exceptions.TumblrInvalidRedirect()
+                    return sanic.redirect(location)
+            elif tumblr_response.status in (429, 500, 502, 503, 504):
+                return sanic.response.empty(status=502)
+
+            hyperblur_response = await request.respond(headers=hyperblur_response_headers, status=tumblr_response.status)
+            try:
+                async for chunk in tumblr_response.content.iter_chunked(65536):
+                    await hyperblur_response.send(chunk)
+            except (asyncio.CancelledError, ConnectionResetError):
+                pass
+            finally:
+                await hyperblur_response.eof()
+    except (aiohttp.ClientError, asyncio.TimeoutError):
+        return sanic.response.empty(status=504)
+    except exceptions.TumblrInvalidRedirect:
+        raise
+    except Exception:
+        return sanic.response.empty(status=502)
+
+@media.get("/media/<cdn:str>/<path:path>")
+async def _media_cdn(request: sanic.Request, cdn: str, path: str):
+    client = request.app.ctx.MediaClient
+    base_url = f"https://{cdn}.media.tumblr.com"
+    additional_headers = None
+    if cdn in ("ve", "va"):
+        additional_headers = {"accept": "video/webm,video/ogg,video/*;q=0.9, application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5"}
+    return await get_media(request, client, path, additional_headers=additional_headers, base_url=base_url)
+
+@media.get(r"/a/<path:path>")
+async def _a_media(request: sanic.Request, path: str):
+    additional_headers = {"accept": "audio/webm,audio/ogg,audio/wav,audio/*;q=0.9,application/ogg;q=0.7,video/*;q=0.6,*/*;q=0.5"}
+    return await get_media(request, request.app.ctx.MediaClient, path, additional_headers=additional_headers, base_url="https://a.tumblr.com")
+
+@media.get(r"/assets/<path:path>")
+async def _tb_assets(request: sanic.Request, path: str):
+    return await get_media(request, request.app.ctx.MediaClient, path, base_url="https://assets.tumblr.com")
+
+@media.get(r"/static/<path:path>")
+async def _tb_static(request: sanic.Request, path: str):
+    return await get_media(request, request.app.ctx.MediaClient, path, base_url="https://static.tumblr.com")
 
 
-
-# 4. Miscellaneous Blueprint
 miscellaneous = sanic.Blueprint("miscellaneous", url_prefix="/")
 
 @miscellaneous.get(r"/at/<path:path>")
@@ -114,7 +167,7 @@ async def _at_links(request: sanic.Request, path: str):
 async def _post_lookup(request: sanic.Request, post_id: int):
     url = f"https://www.tumblr.com/post/{post_id}"
     try:
-        async with request.app.ctx.TumblrAPI.client.head(url, allow_redirects=False) as response:
+        async with request.app.ctx.MediaClient.head(url, allow_redirects=False) as response:
             if response.status in (301, 302, 307, 308) and "location" in response.headers:
                 location_url = response.headers["location"]
                 parsed = urllib.parse.urlparse(location_url)
@@ -136,7 +189,6 @@ async def _post_lookup(request: sanic.Request, post_id: int):
     raise exceptions.TumblrInvalidRedirect()
 
 
-# 5. Search Blueprint
 search = sanic.Blueprint("search", url_prefix="/search")
 
 @search.get("/")
@@ -215,7 +267,6 @@ async def _render_search(request, timeline, query, **kwargs):
     return await request.app.ctx.render("search", context=context)
 
 
-# 6. Tagged Blueprint
 tagged = sanic.Blueprint("tagged", url_prefix="/tagged")
 
 @tagged.get("/<tag:str>")
@@ -239,7 +290,6 @@ async def _main_tagged(request: sanic.Request, tag: str):
     )
 
 
-# 7. Blogs & Blog Post Blueprints
 blogs = sanic.Blueprint("blogs", url_prefix="")
 
 @blogs.get("/")
@@ -287,7 +337,6 @@ async def blog_search_query_param_redirect(request: sanic.Request, blog: str):
     return sanic.redirect(f"/{blog}")
 
 
-# Blog Post Blueprint
 blog_post_bp = sanic.Blueprint("blog_post", url_prefix="/<post_id:int>")
 
 class PostNoteTypes(enum.Enum):
@@ -441,7 +490,6 @@ blogs_group = sanic.Blueprint.group(
 )
 
 
-# 8. API Misc Blueprint
 api_misc = sanic.Blueprint("api_misc", url_prefix="/")
 
 @api_misc.get(r"/poll/<blog:([a-z\d]{1}[a-z\d-]{0,30}[a-z\d]{0,1})>/<post_id:int>/<poll_id:str>/results")
@@ -452,4 +500,4 @@ async def poll_results(request, blog: str, post_id: int, poll_id: int):
     return sanic.response.json(raw["response"], headers={"Cache-Control": "max-age=600, immutable"})
 
 
-BLUEPRINTS = [assets, explore, search, tagged, miscellaneous, blogs_group, api_misc]
+BLUEPRINTS = [assets, explore, search, tagged, media, miscellaneous, blogs_group, api_misc]
