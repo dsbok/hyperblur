@@ -5,6 +5,14 @@ An ultra-fast, privacy-focused, and lightweight alternative frontend for Tumblr.
 ### Tech Stack
 Built for raw speed using **Sanic**, **aiohttp**, **Jinja2**, and **Python 3.13 JIT**. Features unbounded zero-buffer media proxying and eager data fetching.
 
+### Features
+- **Total Privacy**: All requests are reverse-proxied; Tumblr never sees your IP or tracks your browsing.
+- **Blazing Fast**: Zero-buffer media streaming, background page prefetching, and raw compressed pass-through.
+- **JS-Free Fallback**: Browse blogs, notes, and searches flawlessly even with JavaScript disabled.
+- **One-Click Downloads**: Save videos locally directly from any post.
+- **Advanced Filtering**: Sort searches and timelines by media type, popularity, or recency.
+- **Themes**: Native light and dark mode support.
+
 ### Quick Start (Docker)
 
 ```yaml
