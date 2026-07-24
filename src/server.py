@@ -252,7 +252,6 @@ async def after_all_routes(request, response):
     response.headers["x-xss-protection"] = "1; mode=block"
     response.headers["x-content-type-options"] = "nosniff"
     response.headers["referrer-policy"] = "same-origin"
-    response.headers["content-security-policy"] = STATIC_CSP_HEADER
 
 
 for route in routes.BLUEPRINTS:
