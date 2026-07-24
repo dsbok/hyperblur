@@ -3,7 +3,10 @@ WORKDIR /hyperblur
 
 COPY ./requirements.txt ./requirements.txt
 
-# ponytail: docker layer caching optimization -> copy requirements & install before src copy
+ENV HYPERBLUR_HOST=0.0.0.0
+ENV HYPERBLUR_PORT=8000
+
+
 RUN apk update && apk upgrade --no-cache && \
     apk add --no-cache tini && \
     addgroup -g 1000 -S hyperblur && \

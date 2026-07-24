@@ -284,4 +284,5 @@ if __name__ == "__main__":
         workers=config.deployment.workers,
         dev=config.misc.dev_mode,
         access_log=False,
+        fast=True,
     )
