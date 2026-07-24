@@ -32,33 +32,13 @@
         {%- endif -%}
         </form>
 
-        <select id="media-filter"  onchange="applyMediaFilter()">
+        <select id="media-filter"  class="nav-select">
             <option value="all">All Posts</option>
             <option value="media-only">Media Only (Hide Text Posts)</option>
         </select>
     </div>
 
-    <script>
-        function applyMediaFilter() {
-            const filter = document.getElementById("media-filter").value;
-            if (filter === "media-only") {
-                document.body.classList.add("media-only-mode");
-            } else {
-                document.body.classList.remove("media-only-mode");
-            }
-            // Save preference to localStorage
-            localStorage.setItem("mediaFilterPreference", filter);
-        }
-
-        // Apply on load
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedFilter = localStorage.getItem("mediaFilterPreference");
-            if (savedFilter) {
-                document.getElementById("media-filter").value = savedFilter;
-                applyMediaFilter();
-            }
-        });
-    </script>
+    
     <style>
         body.media-only-mode .post.text-only {
             display: none !important;
