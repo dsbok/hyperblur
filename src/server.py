@@ -281,7 +281,6 @@ if __name__ == "__main__":
     app.run(
         host=config.deployment.host,
         port=config.deployment.port,
-        workers=config.deployment.workers,
         dev=config.misc.dev_mode,
         access_log=False,
         fast=True,
