@@ -32,7 +32,7 @@
         {%- endif -%}
         </form>
 
-        <select id="media-filter"  class="nav-select">
+        <select id="media-filter" onchange="applyMediaFilter()">
             <option value="all">All Posts</option>
             <option value="media-only">Media Only (Hide Text Posts)</option>
         </select>
@@ -44,6 +44,30 @@
             display: none !important;
         }
     </style>
+    
+    <script>
+        function applyMediaFilter() {
+            const mediaFilter = document.getElementById("media-filter");
+            if (!mediaFilter) return;
+            const filter = mediaFilter.value;
+            if (filter === "media-only") {
+                document.body.classList.add("media-only-mode");
+            } else {
+                document.body.classList.remove("media-only-mode");
+            }
+            localStorage.setItem("mediaFilterPreference", filter);
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedFilter = localStorage.getItem("mediaFilterPreference");
+            if (savedFilter) {
+                const mediaFilter = document.getElementById("media-filter");
+                if (mediaFilter) {
+                    mediaFilter.value = savedFilter;
+                    applyMediaFilter();
+                }
+            }
+        });
+    </script>
     
     {%- block blog_contents %}
     {%- endblock %}
