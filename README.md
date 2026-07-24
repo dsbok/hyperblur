@@ -24,5 +24,15 @@ docker compose up -d
 
 Access at `http://localhost:8010`.
 
+### Custom Authorization Token (Optional)
+Hyperblur works perfectly out-of-the-box for public Tumblr content without any configuration. However, if you want to view private, age-restricted, or logged-in-only blogs, you can provide your own Tumblr authorization token.
+
+**How to get it:**
+1. Log into Tumblr in your browser.
+2. Open Developer Tools (F12) and go to the **Network** tab.
+3. Refresh the page and click on any API request (like `graphql` or `timeline`).
+4. Scroll down to **Request Headers** and copy the entire value of the `Authorization` header (it looks like `Bearer ...`).
+5. Uncomment the `HYPERBLUR_TUMBLR_AUTHORIZATION` line in your `docker-compose.yml` and paste the token there.
+
 ---
 Distributed under the [GNU AGPLv3 License](https://www.google.com/search?q=LICENSE).
