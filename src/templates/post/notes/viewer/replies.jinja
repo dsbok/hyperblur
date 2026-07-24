@@ -2,7 +2,7 @@
 {% from 'components/icons/expand.jinja' import dropdown_icon  %}
 
 {% block control_bar %}
-    <select class="nav-select">
+    <select class="nav-select" onchange="window.location.href=this.value">
             <option value="/{{post_url}}?note_viewer=replies" {% if latest is false %} selected {% endif %}>{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_oldest")|e}}</option>
             <option value="/{{post_url}}?note_viewer=replies&latest" {% if latest %} selected {% endif %}>{{translate(request.ctx.language, "post_note_viewer_view_replies_filter_sort_newest")|e}}</option>
         </select>

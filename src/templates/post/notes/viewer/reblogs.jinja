@@ -3,7 +3,7 @@
 {% from 'components/icons/expand.jinja' import dropdown_icon  %}
 
 {% block control_bar %}
-    <select class="nav-select">
+    <select class="nav-select" onchange="window.location.href=this.value">
             {% if reblog_filter is none  %}
                 {% set reblog_filter = "reblogs_with_comments" %}
             {% endif %}
